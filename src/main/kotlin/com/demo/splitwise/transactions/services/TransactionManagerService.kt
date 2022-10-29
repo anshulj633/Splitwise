@@ -34,7 +34,10 @@ class TransactionManagerService (
 
     fun validateExpenseRequest(expenseRequest: TransactionRequest){
         try {
-            SplitType.valueOf(expenseRequest.splitType!!)
+            val splitType = SplitType.valueOf(expenseRequest.splitType!!)
+            if (splitType == SplitType.Percent)
+                if (expenseRequest.users.sumOf { it.sharePercentage!! } != 100.0)
+                    throw IllegalArgumentException()
         }
         catch (IllegalArgumentException: Exception){
             println("Please use the correct split type")
