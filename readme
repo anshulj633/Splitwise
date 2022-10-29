@@ -1,0 +1,48 @@
+The following are the most fundamental features of the app:
+    -Create a new expense
+        -The expense can be split between any number of users
+        -The expense can be paid for by any number of users
+        -The expense can be split equally / by percentage / manually
+    -View the list of all expenses split with you, regardless of which user created the expense
+    -View outstanding balances with all the users you have split expenses with in the past
+    -View your overall outstanding balance
+
+
+A: Anshul, N: Naresh, S: Shivam
+E1: A,N for 600. Paid by A. Split equally (A: 300, N: 300).
+E2: A,N,S for 1000. Paid by S. Split equally between only A & N (A: 500, N: 500)
+
+Users
+userName
+email
+balance
+
+UsersBalanceMapping
+paidBy A
+paidTo N
+amount: 0
+
+
+(A, N, 300)
+(N, S, -300)
+(S, A, 300)
+
+Transaction
+id
+expenseId
+paidBy
+amount
+type
+(101, 1001, A, 600, equially)
+(102, 1001, S, 1000, equially)
+
+UsersTransactions
+transactionId
+userId
+amount
+(101, A, 300)
+(101, N, -300)
+(102, A, -500)
+(102, N, -500)
+(102, S, 1000)
+
