@@ -37,29 +37,30 @@ Have Added postman collection on root level - Splitwise.postman_collection.json
 And for to make testing simple whenever user in expense doesn't exist in DB, added that in db.
 More function level documentation can be added.
 
-
+## Entities
+```sh
 Users
-    userName
+    userName //PK
     email
     balance
 
 UsersBalanceMapping
-    paidBy
-    paidTo
+    paidBy //PK
+    paidTo //PK
     amount
 
 Transaction
-    id
+    id //PK
     paidBy
     amount
     type
 
 UsersTransactions
-    transactionId
-    userId
+    transactionId //PK
+    userId //PK
     amount
-    
-    
+```    
+ 
 sample apis->
 1. Create expense
 POST-> localhost:8080/transaction
