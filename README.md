@@ -1,7 +1,7 @@
 
 
 ## Setup Requirements
-Used H2 SQL in-memory Database to minimise setup requirements. 
+Used H2 SQL in-memory Database to minimise setup requirements. <br>
 Install OpenJDK: Use version 11.0.1
 
 ```sh
@@ -19,22 +19,22 @@ $ ./gradlew bootRun # run as spring boot application
 
 
 ##Requirements
-The following are the most fundamental features of the app:
-    -Create a new expense
-        -The expense can be split between any number of users
-        -The expense can be paid for any number of users
-        -The expense can be split equally / by percentage / manually
-    -View the list of all expenses split with you, regardless of which user created the expense
-    -View outstanding balances with all the users you have split expenses with in the past
-    -View your overall outstanding balance
+The following are the most fundamental features of the app: <br>
+    -Create a new expense <br>
+        -The expense can be split between any number of users <br>
+        -The expense can be paid for any number of users <br>
+        -The expense can be split equally / by percentage / manually <br>
+    -View the list of all expenses split with you, regardless of which user created the expense <br>
+    -View outstanding balances with all the users you have split expenses with in the past <br>
+    -View your overall outstanding balance <br>
 
-Did it only for 1 payee for 1 expense but the code is extensible for such changes
+Did it only for 1 payee for 1 expense but the code is extensible for such changes <br>
 
 ## Notes
-Did it only for 1 payee for 1 expense but the code is extensible for such changes
-Error handling/validations can be done better but as discussed, i did necessary one's only
-Have Added postman collection on root level - Splitwise.postman_collection.json
-And for to make testing simple whenever user in expense doesn't exist in DB, added that in db.
+Did it only for 1 payee for 1 expense but the code is extensible for such changes <br>
+Error handling/validations can be done better but as discussed, i did necessary one's only <br>
+Have Added postman collection on root level - Splitwise.postman_collection.json <br>
+And for to make testing simple whenever user in expense doesn't exist in DB, added that in db. <br>
 More function level documentation can be added.
 
 ## Entities
@@ -44,12 +44,12 @@ Users
     email
     balance
 
-UsersBalanceMapping
+UsersBalances
     paidBy //PK
     paidTo //PK
     amount
 
-Transaction
+Transactions
     id //PK
     paidBy
     amount
@@ -61,11 +61,11 @@ UsersTransactions
     amount
 ```    
  
-sample apis->
-1. Create expense
-POST-> localhost:8080/transaction
-splitType: { Equal,    Manual,    Percent}
-request-> 
+sample apis-> <br>
+1. Create expense <br>
+POST-> localhost:8080/transaction <br>
+splitType: { Equal,    Manual,    Percent} <br>
+request->  <br>
 ```sh
 {
     "paidBy": "user1",
@@ -97,25 +97,25 @@ request->
 }
 ```
 
-2. add user
-POST-> localhost:8080/user
-request->
+2. add user <br>
+POST-> localhost:8080/user <br>
+request-> <br>
 ```sh
 {
     "userName": "user1"
 }
 ```
 
-3. Get user's overall balance
-GET-> localhost:8080/user/{userName}/getOverallBalance
-Response->
+3. Get user's overall balance <br>
+GET-> localhost:8080/user/{userName}/getOverallBalance <br>
+Response-> <br>
 ```sh
 100.0
 ```
 
-4. Get Outstanding Balances with all users
-GET-> localhost:8080/user/{userName}/getOutstandingBalances
-Response->
+4. Get Outstanding Balances with all users <br>
+GET-> localhost:8080/user/{userName}/getOutstandingBalances <br>
+Response-> <br>
 ```sh
 [
     {
@@ -136,9 +136,9 @@ Response->
 ]
 ```
 
-5. get all expenses for a user
-GET -> localhost:8080/transaction/user1
-Response->
+5. get all expenses for a user <br>
+GET -> localhost:8080/transaction/user1 <br>
+Response-> <br>
 ```sh
 {
     "expenses": [
