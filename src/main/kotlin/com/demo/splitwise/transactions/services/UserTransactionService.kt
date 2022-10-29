@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service
 class UserTransactionService(
     val userTransactionRepository: UserTransactionRepository
 ) {
+
+    /**
+     * add all [UserTransaction] for all involved users in an expense
+     */
     fun addUserTransactions(transaction: Transaction, userShareDtos: List<UserShareFunctionDto>): List<UserTransaction>{
         val userTransactions = mutableListOf<UserTransaction>()
         userShareDtos.forEach {

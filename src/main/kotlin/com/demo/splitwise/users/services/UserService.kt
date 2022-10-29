@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service
 class UserService(
     private val userRepository: UserRepository
 ) {
+    /**
+     * adds new user
+     */
     fun addUser(userRequest: UserRequest): User {
         val user = User(userRequest.userName)
         userRepository.save(user)
@@ -17,6 +20,9 @@ class UserService(
         return user
     }
 
+    /**
+     * returnd user's aggregate balance
+     */
     fun getUserBalance(userName: String): Double {
         return try {
             userRepository.findById(userName).get().balance
@@ -26,12 +32,15 @@ class UserService(
         }
     }
 
+    /**
+     * returns list of users
+     */
     fun getUsers(userNames: List<String>): MutableList<User> {
-        try {
-            return userRepository.findAllById(userNames) as MutableList<User>
+        return try {
+            userRepository.findAllById(userNames) as MutableList<User>
         } catch (e: Exception) {
             println(e)
-            return emptyList<User>() as MutableList<User>
+            emptyList<User>() as MutableList<User>
         }
     }
 
@@ -40,6 +49,21 @@ class UserService(
         userRepository.save(user)
 
         return user
+    }
+
+    /**
+     * Create bulk users
+     */
+    fun createUsers(userNames: List<String>): List<User>{
+        val users = getUsers(userNames)
+        val registeredUserNames = users.map { it.userName }
+        val nonRegisteredUsers = userNames.filter { it !in registeredUserNames }
+
+        nonRegisteredUsers.forEach {
+            users.add(addUser(UserRequest(it)))
+        }
+
+        return users
     }
 
     fun updateBalance(userName: String, amount: Double) {

@@ -18,6 +18,12 @@ class UserBalancesService(
     private val userService: UserService
 ) {
 
+    /**
+     * Update balances btw 2 users
+     *
+     * @param: transaction :[Transaction]
+     * @param: userTransactions: [List<UserTransaction>]
+     */
     fun updateBalances(transaction: Transaction, userTransactions: List<UserTransaction>) {
         userTransactions.filter { it.userName != transaction.paidBy }.forEach {
             var isPayee = false
@@ -47,6 +53,11 @@ class UserBalancesService(
         userService.updateBalance(transaction.paidBy, transaction.amount)
     }
 
+    /**
+     * returns all the non zero balances with other users for given user
+     *
+     * @param: userName: [String]
+     */
     fun getAllOutstandingBalances(userName: String): List<UserBalance> {
         return try {
             userBalanceRepository.findByPaidByOrPaidFor(userName, userName).filter { it.amount != 0.0 }

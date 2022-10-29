@@ -10,6 +10,9 @@ class TransactionService(
     val transactionRepository: TransactionRepository
 ){
 
+    /**
+     * adds transaction for a expense
+     */
     fun addTransaction(paidByUser: String, splitType: SplitType, amount: Double): Transaction{
         val transaction = Transaction(
             paidByUser,
